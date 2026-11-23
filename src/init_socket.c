@@ -9,7 +9,7 @@
  * This function will create a PACKET_SOCKET to capture all Link-layer packets
  * Bind this socket to a Network Interface
  * Turn on Promiscuous mode to sniff all packets include that has different
- * address from host (with Ethernet connection, Wi-Fi will be discarded automatically)
+ * address from host (with Ethernet connection, Wi-Fi packet will be discarded automatically by driver)
  */
 int init_socket() {
 
@@ -38,7 +38,10 @@ int init_socket() {
 	pk_mr.mr_type = PACKET_MR_PROMISC; //turn on Promiscuous mode
 	socklen_t optlen = sizeof(struct packet_mreq);
 									  
-	// set option for socket
+	// Set option for socket
+	// Setsockopt will make kernel turn off Promiscuous automatically 
+	// after close the socket
+	// ioctl not
 	setsockopt(packet_socket, SOL_PACKET, PACKET_ADD_MEMBERSHIP, &pk_mr, optlen);
 
 	return packet_socket;

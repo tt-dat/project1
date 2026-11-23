@@ -1,0 +1,17 @@
+Week 1: Understand the mechanism of Linux Network Stack and capture raw bytes from network card
+
+
+- Use Packet Socket and SOCK_RAW socktype to capture all Ethernet packet include header, Raw Socket only capture packet at a network layer and it decapsulates link-layer header. Packet socket also allow turn on Promiscuous mode of network driver
+
+- Use if_nametoindex() to not to hardcode network interface
+
+- Turn on Promiscuous mode using setsockopt() instead of ioctl to auto disable this option when socket is closed
+
+- Program should run with sudo because it need CAP_NET_RAW capability at user namespace to govern it's network namespace
+
+- With 802.11(Wifi) frame, driver will replace it header with a ethernet header with same information
+
+
+
+Week 2: Protocol Dissector/Parser
+- Every field in every struct with more than one byte must use ntohs(), ntohl() before use
