@@ -6,6 +6,7 @@
 
 // use ip, tcp, udp... header structure
 #include <netinet/ip.h>
+#include <netinet/ip6.h>
 #include <netinet/tcp.h>
 #include <netinet/udp.h>
 #include <netinet/ip_icmp.h>

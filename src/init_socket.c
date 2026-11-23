@@ -1,4 +1,5 @@
 #include <net.h>
+#include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <errno.h>
@@ -16,7 +17,10 @@ int init_socket() {
 	// socket_type: SOCK_RAW to include Link-layer header
 	// ETH_P_ALL match all protocol
 	int packet_socket = socket(AF_PACKET, SOCK_RAW, htons(ETH_P_ALL));
-	if (packet_socket == -1) { perror("Create socket fail"); }
+	if (packet_socket == -1) { 
+		perror("Create socket fail");
+		exit(1);
+	}
 
 
 	// bind this socket with an interface
@@ -28,7 +32,10 @@ int init_socket() {
 	socklen_t addrlen = sizeof(struct sockaddr_ll);
 	
 	int bind_status = bind(packet_socket, (const struct sockaddr*)&s_addr, addrlen);
-	if (bind_status == -1) { perror("Bind fail"); }
+	if (bind_status == -1) { 
+		perror("Bind fail"); 
+		exit(1);
+	}
 	
 
 	// structure to be passed as argument to PACKET_ADD_MEMBERSHIP option
@@ -42,7 +49,10 @@ int init_socket() {
 	// Setsockopt will make kernel turn off Promiscuous automatically 
 	// after close the socket
 	// ioctl not
-	setsockopt(packet_socket, SOL_PACKET, PACKET_ADD_MEMBERSHIP, &pk_mr, optlen);
+	int set_status = setsockopt(packet_socket, SOL_PACKET, PACKET_ADD_MEMBERSHIP, &pk_mr, optlen);
+	if (set_status == -1) {
+		perror("Cannot' set socket option");
+	}
 
 	return packet_socket;
 
