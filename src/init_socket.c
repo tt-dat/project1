@@ -1,8 +1,5 @@
 #include <net.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <errno.h>
+#include <libc.h>
 
 #define NETWORK_INTERFACE "wlan0"
 

@@ -1,7 +1,7 @@
 CC = gcc
 
 INCDIR = ./include
-CFLAGS = -I$(INCDIR)
+CFLAGS = -I$(INCDIR) 
 
 SRCDIR = ./src
 OBJDIR = ./obj

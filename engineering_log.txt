@@ -14,4 +14,18 @@ Week 1: Understand the mechanism of Linux Network Stack and capture raw bytes fr
 
 
 Week 2: Protocol Dissector/Parser
+
+- In general, compiler will make alignment for struct so that the access to the memory is efficent, __attribute__ ((__packed__)) in definition of struct ether_header tell compiler to preserve the "packed" structure, not to pad additional bit. It ensure that it will comply with the data transmited from network
 - Every field in every struct with more than one byte must use ntohs(), ntohl() before use
+
+- Each layer choose implementation of different protocols from field pushed by lower layer
+
+- Each layer remove header and push it's payload(upper layer packet) and upper protocol
+
+- Packet type is updated at each layer, and the last update will be chosen
+
+- Use sprintf to write to temporary buffer to:
++ Decrease I/O operation(printf, fprintf...)
++ Manipulate the order of the output(what is printed first, next, last...)
+
+- Use unsigned char instead of char for proper printing
