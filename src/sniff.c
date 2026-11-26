@@ -1,7 +1,9 @@
 #include <net.h>
 #include <libc.h>
+#include <parse.h>
+#include <parse_buffer.h>
 
-#define BUF_SIZE ETH_MAX_MTU
+#define PACKET_SIZE ETH_MAX_MTU
 
 /* This function read raw bytes from network card
  * and call process_packet() to fill information
@@ -9,18 +11,23 @@
  */
 void sniff(int packet_socket) {
 	
-	unsigned char buf[BUF_SIZE];
+	unsigned char pack[PACKET_SIZE];
+
+	// init parse buffer for use during sniffing
+	alloc_parse_buffer();
 
 	while (1) {
 		// read packet
-		int byte_reads = recv(packet_socket, buf, BUF_SIZE, 0);
+		int byte_reads = recv(packet_socket, pack, PACKET_SIZE, 0);
 		if (byte_reads < 0) { 
 			perror("recv error"); 
 			exit(1);
 		}
 
-		process_packet(buf, byte_reads);
+		parse(pack, byte_reads);
 
 	}
+
+	free_parse_buffer();
 }
 

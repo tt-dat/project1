@@ -4,6 +4,8 @@
 #include <linux/if_packet.h> // for using struct sockaddr_ll, struct packet_mreq
 #include <net/if.h>			 // for using if_nametodinex()
 
+#include <netinet/in.h>
+
 // use ip, tcp, udp... header structure
 #include <netinet/ip.h>
 #include <netinet/ip6.h>
@@ -13,6 +15,3 @@
 
 
 
-int init_socket();
-void sniff(int);
-void process_packet(unsigned char*, size_t);

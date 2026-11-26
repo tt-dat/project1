@@ -1,7 +1,10 @@
 CC = gcc
 
 INCDIR = ./include
-CFLAGS = -I$(INCDIR) 
+CFLAGS = -I$(INCDIR)  
+
+# add this to stop process at runtime when undefined behavior or stack overflow happen
+LDFLAGS = -fsanitize=address,undefined
 
 SRCDIR = ./src
 OBJDIR = ./obj
