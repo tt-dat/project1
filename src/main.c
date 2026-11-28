@@ -15,13 +15,13 @@ int main() {
 	int packet_socket = init_socket();
 
 	// drop privilege
-	//int u_st = setuid(NOBODY);
-	// int g_st = setgid(NOBODY);
+	int g_st = setgid(NOBODY);
+	int u_st = setuid(NOBODY);
 
-	// if (u_st < 0 || g_st < 0) {
-	// 	perror("set ID");
-	// 	exit(1);
-	// }
+	if (u_st < 0 || g_st < 0) {
+		perror("set ID");
+		exit(1);
+	}
 	
 	sniff(packet_socket);
 }

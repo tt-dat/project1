@@ -22,6 +22,8 @@ Week 2: Protocol Dissector/Parser
 - Every field in every struct with more than one byte must use ntohs(), ntohl() before use
 
 * Design
+- use shared buffer to assemble packets' info
+
 - Each layer choose implementation of different protocols from field pushed by lower layer
 
 - Each layer remove header and push it's payload(upper layer packet) and upper protocol
@@ -31,6 +33,7 @@ Week 2: Protocol Dissector/Parser
 - because flow label in IPv6 is 20 bytes, not a multiply of 8, so it is packed into union with version
 
 * Performance
+- use zero-copy casting by directly cast from captured packets
 - Use sprintf to write to temporary buffer to:
 + Decrease I/O operation(printf, fprintf...)
 + Manipulate the order of the output(what is printed first, next, last...)

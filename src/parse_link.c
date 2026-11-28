@@ -7,7 +7,7 @@
  * and transport payload and upper protocol to upper level
  */
 void parse_link_frame(unsigned char* frame, size_t frame_size) {
-	packet_name = "***ethernet packet***";
+	packet_name = "***Ethernet packet***";
 
 	// get header
 	struct ether_header* ethh = (struct ether_header*)frame;
@@ -15,7 +15,7 @@ void parse_link_frame(unsigned char* frame, size_t frame_size) {
 	size_t header_size = sizeof(struct ether_header);
 
 	// dump header content
-	dump_string("ethernet header:\n");
+	dump_string("Ethernet header:\n");
 	dump_data(frame, header_size);
 
 	// move payload to upper level

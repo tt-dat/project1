@@ -54,7 +54,7 @@ void parse_network_datagram(unsigned char* dgram, size_t dgram_size, uint16_t pr
 	unsigned char* segment = dgram + header_size;
 	size_t segment_size = dgram_size - header_size;
 
-	//parse_transport_segment(segment, segment_size, transport_proto);
+	parse_transport_segment(segment, segment_size, transport_proto);
 
 }
 
